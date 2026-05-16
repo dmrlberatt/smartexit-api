@@ -12,8 +12,9 @@ app = FastAPI(
 
 geolocator = Nominatim(user_agent="smartexit_python_ogrencisi")
 
+# NOT: CSV'deki formata uyması için istasyon_id yerine istasyon_adi yaptık
 @app.get("/api/v1/en-iyi-cikis")
-async def cikis_optimize_et(istasyon_id: str, hedef_adres: str, asansor_sart: bool = False):
+async def cikis_optimize_et(istasyon_adi: str, hedef_adres: str, asansor_sart: bool = False):
     try:
         lokasyon = geolocator.geocode(
             hedef_adres,
@@ -27,7 +28,8 @@ async def cikis_optimize_et(istasyon_id: str, hedef_adres: str, asansor_sart: bo
         hedef_enlem = lokasyon.latitude
         hedef_boylam = lokasyon.longitude
         
-        oneriler = en_iyi_cikislari_bul(istasyon_id, hedef_enlem, hedef_boylam, asansor_sart)
+        # Güncellenmiş geo_hesaplama fonksiyonunu çağırıyoruz
+        oneriler = en_iyi_cikislari_bul(istasyon_adi, hedef_enlem, hedef_boylam)
         
         if not oneriler:
              raise HTTPException(status_code=404, detail="Uygun çıkış bulunamadı.")
@@ -52,10 +54,11 @@ async def cikis_optimize_et(istasyon_id: str, hedef_adres: str, asansor_sart: bo
                 "koordinat": {"enlem": hedef_enlem, "boylam": hedef_boylam}
             },
             "en_iyi_cikis": {
-                "cikis_numarasi": en_iyi_kapi['cikis_numarasi'],
-                "kapi_ismi": en_iyi_kapi['kapi_ismi'],
+                # Yeni CSV sütun isimlerini buraya entegre ettik
+                "cikis_numarasi": en_iyi_kapi['cikis_no'],
+                "kapi_ismi": en_iyi_kapi['cikis_adi'],
                 "mesafe_metre": round(en_iyi_kapi['mesafe_metre'], 1),
-                "asansorlu_mu": bool(en_iyi_kapi['asansor_var_mi'])
+                "asansorlu_mu": en_iyi_kapi.get('asansor_var_mi', False)
             },
             # API'yi kullanan mobil uygulama bu dizi ile haritaya mavi çizgisini çizecek!
             "yurume_rotasi_koordinatlari": gercek_rota, 
@@ -68,4 +71,4 @@ async def cikis_optimize_et(istasyon_id: str, hedef_adres: str, asansor_sart: bo
         raise HTTPException(status_code=500, detail=f"Sistem Hatası: {str(e)}")
 
 if __name__ == "__main__":
-    uvicorn.run("api:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
