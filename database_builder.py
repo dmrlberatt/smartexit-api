@@ -1,5 +1,8 @@
 import sqlite3
+import pandas as pd
+from shapely.wkt import loads
 
+# Güvenlik Hendeği (Tuzlama) Değerleri
 SALT_LAT = 0.0050
 SALT_LON = -0.0030
 
@@ -7,52 +10,42 @@ def veritabani_olustur():
     conn = sqlite3.connect("smartexit.db")
     cursor = conn.cursor()
     
+    # Yeni ve güvenli tablomuzu oluşturuyoruz
+    cursor.execute("DROP TABLE IF EXISTS cikislar")
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS istasyonlar (
-            id TEXT PRIMARY KEY,
-            isim TEXT NOT NULL,
-            sehir TEXT NOT NULL
-        )
-    ''')
-    
-    cursor.execute('DROP TABLE IF EXISTS kapilar')
-    cursor.execute('''
-        CREATE TABLE kapilar (
-            id TEXT PRIMARY KEY,
-            istasyon_id TEXT,
-            cikis_numarasi TEXT NOT NULL,
-            kapi_ismi TEXT NOT NULL,
+        CREATE TABLE cikislar (
+            cikis_id TEXT PRIMARY KEY,
+            istasyon_adi TEXT NOT NULL,
+            cikis_adi TEXT NOT NULL,
+            cikis_no INTEGER,
             tuzlu_enlem REAL NOT NULL,
-            tuzlu_boylam REAL NOT NULL,
-            asansor_var_mi INTEGER DEFAULT 0,
-            FOREIGN KEY (istasyon_id) REFERENCES istasyonlar (id)
+            tuzlu_boylam REAL NOT NULL
         )
     ''')
     
-    conn.commit()
-    return conn, cursor
-
-def test_verisi_ekle(conn, cursor):
-    cursor.execute('''
-        INSERT OR IGNORE INTO istasyonlar (id, isim, sehir) 
-        VALUES ('m2_sisli', 'Şişli - Mecidiyeköy', 'İstanbul')
-    ''')
+    # Yeni formatlı CSV dosyanı okuyoruz
+    df = pd.read_csv("kapilar.csv")
     
-    gercek_enlem = 41.0625
-    gercek_boylam = 28.9922
-    
-    gizli_enlem = gercek_enlem + SALT_LAT
-    gizli_boylam = gercek_boylam + SALT_LON
-    
-    cursor.execute('''
-        INSERT OR REPLACE INTO kapilar (id, istasyon_id, cikis_numarasi, kapi_ismi, tuzlu_enlem, tuzlu_boylam, asansor_var_mi)
-        VALUES ('m2_sisli_cikis_1', 'm2_sisli', '1', 'Şişli Camii Çıkışı', ?, ?, 1)
-    ''', (gizli_enlem, gizli_boylam))
+    # Her bir satırı dönüp POINT formatını parçalıyor ve tuzluyoruz
+    for index, row in df.iterrows():
+        # POINT(boylam enlem) yapısını shapely ile okuyoruz
+        geometri = loads(row["koordinat"])
+        gercek_boylam = geometri.x
+        gercek_enlem = geometri.y
+        
+        # Koordinatları tuzluyoruz
+        gizli_enlem = gercek_enlem + SALT_LAT
+        gizli_boylam = gercek_boylam + SALT_LON
+        
+        # Veritabanına şifrelenmiş haliyle kaydediyoruz
+        cursor.execute('''
+            INSERT INTO cikislar (cikis_id, istasyon_adi, cikis_adi, cikis_no, tuzlu_enlem, tuzlu_boylam)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (row["cikis_id"], row["istasyon_adi"], row["cikis_adi"], row["cikis_no"], gizli_enlem, gizli_boylam))
     
     conn.commit()
     conn.close()
+    print("Sadeleştirilmiş CSV, tuzlama (güvenlik) katmanından geçirilerek veritabanına başarıyla kaydedildi!")
 
 if __name__ == "__main__":
-    baglanti, imlec = veritabani_olustur()
-    test_verisi_ekle(baglanti, imlec)
-    print("Tablolar güncel şema ile başarıyla oluşturuldu ve test verisi eklendi.")
+    veritabani_olustur()
