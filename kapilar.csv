@@ -1,4 +1,6 @@
-istasyon_id,cikis_numarasi,kapi_ismi,gercek_enlem,gercek_boylam,asansor_var_mi
-m2_sisli,1,Cevahir Cikisi,41.0628,28.9932,1
-m2_sisli,2,Mecidiyekoy Meydan,41.0650,28.9940,0
-m4_kadikoy,3,Rihtim,40.9912,29.0223,1
+istasyon_adi,unite_tipi,unite_adi,koordinat,hedef_unite_adi
+Mecidiyeköy,peron,M7_Peron_Hatti,"LINESTRING(28.994200 41.066000, 28.995600 41.066200)",None
+Mecidiyeköy,kapi,M7_Kapi_1_Meydan_Merdiveni,"POINT(28.994500 41.066100)",Turnike_Cikis_1
+Mecidiyeköy,kapi,M7_Kapi_3_Buyukdere_Merdiveni,"POINT(28.995200 41.066150)",Turnike_Cikis_3
+Mecidiyeköy,turnike,Turnike_Cikis_1,"POINT(28.9945859 41.0661624)",Mecidiyeköy Meydan Çıkışı
+Mecidiyeköy,turnike,Turnike_Cikis_3,"POINT(28.9954211 41.0661131)",Büyükdere Caddesi Çıkışı
