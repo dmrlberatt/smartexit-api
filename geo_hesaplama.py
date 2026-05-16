@@ -14,7 +14,7 @@ def istasyon_kapilarini_getir(istasyon_adi):
     Veritabanından veriyi çeker, tuzlamayı çözer ve Coğrafi Veri Çerçevesine (GeoDataFrame) dönüştürür.
     """
     conn = sqlite3.connect("smartexit.db")
-    query = f"SELECT * FROM cikislar WHERE istasyon_adi = '{istasyon_adi}'"z
+    query = f"SELECT * FROM cikislar WHERE istasyon_adi = '{istasyon_adi}'"
     df = pd.read_sql_query(query, conn)
     conn.close()
 
