@@ -25,6 +25,8 @@ def veritabani_olustur():
     
     # Yeni formatlı CSV dosyanı okuyoruz
     df = pd.read_csv("kapilar.csv")
+    # Sütun isimlerindeki o sinsi boşlukları otomatik temizle!
+    df.columns = df.columns.str.strip()
     
     # Her bir satırı dönüp POINT formatını parçalıyor ve tuzluyoruz
     for index, row in df.iterrows():
