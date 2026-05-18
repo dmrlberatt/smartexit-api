@@ -14,20 +14,25 @@ app = FastAPI(
 MAPBOX_TOKEN = "pk.eyJ1IjoieGVvbm9yZXMiLCJhIjoiY21wYXVjOWY1MDBrNDJ0cjJuYjltY3duaCJ9.fh1c6d7kL2NokI_nKwVEJA"
 
 @app.get("/api/v1/yer-ara")
-async def yer_ara(sorgu: str):
-    """Kullanıcı büyüteç tuşuna bastığında çalışacak profesyonel Mapbox araması"""
+async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
+    """Mapbox tabanlı, konuma duyarlı akıllı arama"""
     if not sorgu or len(sorgu) < 2:
         raise HTTPException(status_code=400, detail="Lütfen geçerli bir arama metni girin.")
         
-    # Sadece İstanbul ve çevresini arasın diye bbox (Bounding Box) zırhı ekledik
     url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{sorgu}.json"
     params = {
         "access_token": MAPBOX_TOKEN,
         "country": "tr",
         "bbox": "27.95,40.80,29.95,41.60", 
         "limit": 5,
-        "language": "tr"
+        "language": "tr",
+        # İŞTE SİHİR BURADA: Sadece mekanları (poi) ve önemli yerleri (place) getir.
+        "types": "poi,place,address" 
     }
+    
+    # EĞER KULLANICI DURAĞINI SEÇMİŞSE: Mapbox'a "Aramaya bu koordinatın etrafından başla" diyoruz.
+    if user_lat and user_lon:
+        params["proximity"] = f"{user_lon},{user_lat}"
     
     try:
         response = requests.get(url, params=params)
@@ -38,7 +43,7 @@ async def yer_ara(sorgu: str):
             sonuclar.append({
                 "yer_ismi": feature.get("text_tr", feature.get("text")),
                 "acik_adres": feature.get("place_name_tr", feature.get("place_name")),
-                "enlem": feature["geometry"]["coordinates"][1], # Mapbox sırası boylam,enlem şeklindedir
+                "enlem": feature["geometry"]["coordinates"][1],
                 "boylam": feature["geometry"]["coordinates"][0]
             })
         return {"durum": "basarili", "sonuclar": sonuclar}
