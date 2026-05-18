@@ -2,23 +2,23 @@ import sqlite3
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
-from shapely.wkt import loads
 from geopy.distance import geodesic
 
 # Veritabanına kaydederken kullandığımız tuz (şifre) anahtarları
 SALT_LAT = 0.0050
 SALT_LON = -0.0030
 
-def istasyon_kapilarini_getir(istasyon_adi):
+def istasyon_kapilarini_getir(istasyon_adi: str, hat_kodu: str):
     """
-    Veritabanından veriyi çeker, tuzlamayı çözer ve Coğrafi Veri Çerçevesine (GeoDataFrame) dönüştürür.
+    Veritabanından veriyi çeker (Hat kodu filtreli), tuzlamayı çözer ve GeoDataFrame'e dönüştürür.
     """
     conn = sqlite3.connect("smartexit.db")
-    query = f"SELECT * FROM cikislar WHERE istasyon_adi = '{istasyon_adi}'"
-    df = pd.read_sql_query(query, conn)
+    # Yenimahalle karışıklığını önlemek için hat_kodu parametresini de SQL sorgusuna ekliyoruz
+    query = "SELECT * FROM cikislar WHERE istasyon_adi = ? AND hat_kodu = ?"
+    df = pd.read_sql_query(query, conn, params=(istasyon_adi, hat_kodu))
     conn.close()
 
-    # Eğer istasyon bulunamazsa boş bir GeoDataFrame dönelim ki kod patlamasın
+    # Eğer istasyon/hat bulunamazsa boş bir GeoDataFrame dönelim ki kod patlamasın
     if df.empty:
         return gpd.GeoDataFrame()
 
@@ -33,11 +33,11 @@ def istasyon_kapilarini_getir(istasyon_adi):
     gdf = gpd.GeoDataFrame(df, geometry=geometriler, crs="EPSG:4326")
     return gdf
 
-def en_iyi_cikislari_bul(istasyon_adi, hedef_enlem, hedef_boylam):
+def en_iyi_cikislari_bul(istasyon_adi: str, hat_kodu: str, hedef_enlem: float, hedef_boylam: float):
     """
     Hedef koordinata göre istasyondaki en yakın Top-3 çıkışı hesaplar.
     """
-    gdf = istasyon_kapilarini_getir(istasyon_adi)
+    gdf = istasyon_kapilarini_getir(istasyon_adi, hat_kodu)
     
     if gdf.empty:
         return []
@@ -53,19 +53,31 @@ def en_iyi_cikislari_bul(istasyon_adi, hedef_enlem, hedef_boylam):
     # 6. Sıralama ve Kesme (Top-3)
     en_yakinlar = gdf.sort_values(by='mesafe_metre').head(3)
 
-    # Yeni sütun isimlerimizi (cikis_no ve cikis_adi) buraya ekledik
+    # api.py'nin rotayı çizebilmesi için tam olarak bu formata ihtiyacı var
     sonuclar = en_yakinlar[['cikis_no', 'cikis_adi', 'mesafe_metre', 'gercek_enlem', 'gercek_boylam']].to_dict('records')
     return sonuclar
 
+def istasyon_duraklarini_getir():
+    """
+    Flutter arama ekranında alttan açılacak renkli durak listesini verir.
+    Mükerrer isimleri engellemek için DISTINCT kullanıyoruz.
+    """
+    conn = sqlite3.connect("smartexit.db")
+    query = "SELECT DISTINCT istasyon_adi, hat_kodu, hat_rengi FROM cikislar"
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    # Pandas DataFrame'i doğrudan liste içindeki sözlüklere çeviriyoruz
+    return df.to_dict('records')
+
 if __name__ == "__main__":
-    # Test Senaryosu: Mecidiyeköy'den çıktık ve Cevahir AVM'ye (41.0630, 28.9930) gitmek istiyoruz.
+    # Test Senaryosu: M7 Hattı Mecidiyeköy'den Cevahir AVM'ye (41.0630, 28.9930) gidiş
     hedef_lat = 41.0630
     hedef_lon = 28.9930
     
     print("Hedefe en yakın çıkışlar hesaplanıyor...\n" + "-"*30)
     
-    # "Mecidiyeköy" istasyonunu sorguluyoruz.
-    sonuclar = en_iyi_cikislari_bul("Mecidiyeköy", hedef_lat, hedef_lon)
+    sonuclar = en_iyi_cikislari_bul("Mecidiyeköy", "M7", hedef_lat, hedef_lon)
     
     for i, sonuc in enumerate(sonuclar, 1):
         print(f"{i}. Seçenek: {sonuc['cikis_no']} Numaralı Çıkış ({sonuc['cikis_adi']}) -> Yürüme Mesafesi: {sonuc['mesafe_metre']:.1f} metre")
