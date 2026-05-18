@@ -58,17 +58,24 @@ def en_iyi_cikislari_bul(istasyon_adi: str, hat_kodu: str, hedef_enlem: float, h
     return sonuclar
 
 def istasyon_duraklarini_getir():
-    """
-    Flutter arama ekranında alttan açılacak renkli durak listesini verir.
-    Mükerrer isimleri engellemek için DISTINCT kullanıyoruz.
-    """
+    """Flutter arama ekranında alttan açılacak renkli durak listesini ve merkez koordinatlarını verir."""
     conn = sqlite3.connect("smartexit.db")
-    query = "SELECT DISTINCT istasyon_adi, hat_kodu, hat_rengi FROM cikislar"
+    # Her istasyonun çıkışlarının ortalamasını alarak istasyonun merkez noktasını buluyoruz
+    query = """
+    SELECT istasyon_adi, hat_kodu, hat_rengi, 
+           AVG(tuzlu_enlem) as tuzlu_enlem, 
+           AVG(tuzlu_boylam) as tuzlu_boylam 
+    FROM cikislar 
+    GROUP BY istasyon_adi, hat_kodu, hat_rengi
+    """
     df = pd.read_sql_query(query, conn)
     conn.close()
     
-    # Pandas DataFrame'i doğrudan liste içindeki sözlüklere çeviriyoruz
-    return df.to_dict('records')
+    # Tuzu (şifreyi) çözerek gerçek koordinatları Flutter'a gönderiyoruz
+    df['enlem'] = df['tuzlu_enlem'] - SALT_LAT
+    df['boylam'] = df['tuzlu_boylam'] - SALT_LON
+    
+    return df[['istasyon_adi', 'hat_kodu', 'hat_rengi', 'enlem', 'boylam']].to_dict('records')
 
 if __name__ == "__main__":
     # Test Senaryosu: M7 Hattı Mecidiyeköy'den Cevahir AVM'ye (41.0630, 28.9930) gidiş
