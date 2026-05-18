@@ -1,68 +1,84 @@
 from fastapi import FastAPI, HTTPException
-from geopy.geocoders import Nominatim
+import requests
 from geo_hesaplama import en_iyi_cikislari_bul
-from rota_motoru import yurume_rotasi_cek  # YENİ EKLENDİ
+from rota_motoru import yurume_rotasi_cek
 import uvicorn
 
 app = FastAPI(
-    title="SmartExit API",
-    description="Metro Çıkış Optimizasyonu ve Rota Motoru",
-    version="2.0.0" # Rota motoru eklendiği için versiyon atladık!
+    title="SmartExit API - Premium Sürüm",
+    description="Metro Çıkış Optimizasyonu, Mapbox Arama ve OSRM Rota Motoru",
+    version="3.0.0" # Mapbox mimarisine geçtiğimiz için versiyon atladık!
 )
 
-geolocator = Nominatim(user_agent="smartexit_python_ogrencisi")
+# Kendi Mapbox Token'ın
+MAPBOX_TOKEN = "pk.eyJ1IjoieGVvbm9yZXMiLCJhIjoiY21wYXVjOWY1MDBrNDJ0cjJuYjltY3duaCJ9.fh1c6d7kL2NokI_nKwVEJA"
 
-# NOT: CSV'deki formata uyması için istasyon_id yerine istasyon_adi yaptık
-@app.get("/api/v1/en-iyi-cikis")
-async def cikis_optimize_et(istasyon_adi: str, hedef_adres: str, asansor_sart: bool = False):
+@app.get("/api/v1/yer-ara")
+async def yer_ara(sorgu: str):
+    """Kullanıcı büyüteç tuşuna bastığında çalışacak profesyonel Mapbox araması"""
+    if not sorgu or len(sorgu) < 2:
+        raise HTTPException(status_code=400, detail="Lütfen geçerli bir arama metni girin.")
+        
+    # Sadece İstanbul ve çevresini arasın diye bbox (Bounding Box) zırhı ekledik
+    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{sorgu}.json"
+    params = {
+        "access_token": MAPBOX_TOKEN,
+        "country": "tr",
+        "bbox": "27.95,40.80,29.95,41.60", 
+        "limit": 5,
+        "language": "tr"
+    }
+    
     try:
-        lokasyon = geolocator.geocode(
-            hedef_adres,
-            viewbox=[(41.3, 28.4), (40.7, 29.5)], 
-            bounded=True
-        )
+        response = requests.get(url, params=params)
+        data = response.json()
         
-        if not lokasyon:
-            raise HTTPException(status_code=404, detail="Adres bulunamadı.")
-            
-        hedef_enlem = lokasyon.latitude
-        hedef_boylam = lokasyon.longitude
-        
-        # Güncellenmiş geo_hesaplama fonksiyonunu çağırıyoruz
-        oneriler = en_iyi_cikislari_bul(istasyon_adi, hedef_enlem, hedef_boylam)
+        sonuclar = []
+        for feature in data.get("features", []):
+            sonuclar.append({
+                "yer_ismi": feature.get("text_tr", feature.get("text")),
+                "acik_adres": feature.get("place_name_tr", feature.get("place_name")),
+                "enlem": feature["geometry"]["coordinates"][1], # Mapbox sırası boylam,enlem şeklindedir
+                "boylam": feature["geometry"]["coordinates"][0]
+            })
+        return {"durum": "basarili", "sonuclar": sonuclar}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Mapbox Arama Motoru Hatası: {str(e)}")
+
+
+@app.get("/api/v1/en-iyi-cikis")
+async def cikis_optimize_et(istasyon_adi: str, hat_kodu: str, hedef_lat: float, hedef_lon: float, asansor_sart: bool = False):
+    """Adres araması yapmayan, direkt kesin koordinat alan sarsılmaz matematik motorumuz"""
+    try:
+        # geo_hesaplama'ya artık adresi değil, saf koordinatı ve hat kodunu gönderiyoruz
+        oneriler = en_iyi_cikislari_bul(istasyon_adi, hat_kodu, hedef_lat, hedef_lon)
         
         if not oneriler:
              raise HTTPException(status_code=404, detail="Uygun çıkış bulunamadı.")
 
-        # --- YENİ EKLENEN ROTA BÖLÜMÜ ---
-        # Sistemimiz en yakın 3 kapıyı buldu. Biz 1. sıradaki (en mantıklı) kapıyı seçiyoruz.
         en_iyi_kapi = oneriler[0]
         
         # OSRM Motorunu çalıştırıp kapıdan hedefe giden sokak sokak rotayı çekiyoruz
         gercek_rota = yurume_rotasi_cek(
             en_iyi_kapi['gercek_enlem'], 
             en_iyi_kapi['gercek_boylam'], 
-            hedef_enlem, 
-            hedef_boylam
+            hedef_lat, 
+            hedef_lon
         )
-        # --------------------------------
 
         return {
             "durum": "basarili",
             "hedef": {
-                "adres": lokasyon.address,
-                "koordinat": {"enlem": hedef_enlem, "boylam": hedef_boylam}
+                "koordinat": {"enlem": hedef_lat, "boylam": hedef_lon}
             },
             "en_iyi_cikis": {
-                # Yeni CSV sütun isimlerini buraya entegre ettik
                 "cikis_numarasi": en_iyi_kapi['cikis_no'],
                 "kapi_ismi": en_iyi_kapi['cikis_adi'],
                 "mesafe_metre": round(en_iyi_kapi['mesafe_metre'], 1),
                 "asansorlu_mu": en_iyi_kapi.get('asansor_var_mi', False)
             },
-            # API'yi kullanan mobil uygulama bu dizi ile haritaya mavi çizgisini çizecek!
-            "yurume_rotasi_koordinatlari": gercek_rota, 
-            "diger_alternatif_cikislar": oneriler[1:] # Geri kalan 2 kapıyı alternatif olarak veriyoruz
+            "yurume_rotasi_koordinatlari": gercek_rota,
+            "diger_alternatif_cikislar": oneriler[1:]
         }
         
     except HTTPException as e:
