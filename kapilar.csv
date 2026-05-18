@@ -1,3 +1,3 @@
-cikis_id, istasyon_adi,cikis_adi,cikis_no,koordinat
-m7_mecidiyekoy_1,Mecidiyeköy,Mecidiyeköy Meydan,1,"POINT(28.9945859 41.0661624)"
-m7_mecidiyekoy_3,Mecidiyeköy,Büyükdere Caddesi,3,"POINT(28.9954211 41.0661131)"
+cikis_id, istasyon_adi,hat_kodu,hat_rengi,cikis_adi,cikis_no,koordinat
+m7_mecidiyekoy_1,Mecidiyeköy,M7,#B01B89,Mecidiyeköy Meydan,1,"POINT(28.9945859 41.0661624)"
+m7_mecidiyekoy_3,Mecidiyeköy,M7,#B01B89,Büyükdere Caddesi,3,"POINT(28.9954211 41.0661131)"
