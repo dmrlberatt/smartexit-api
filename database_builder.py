@@ -16,6 +16,8 @@ def veritabani_olustur():
         CREATE TABLE cikislar (
             cikis_id TEXT PRIMARY KEY,
             istasyon_adi TEXT NOT NULL,
+            hat_kodu TEXT,
+            hat_rengi TEXT,
             cikis_adi TEXT NOT NULL,
             cikis_no INTEGER,
             tuzlu_enlem REAL NOT NULL,
@@ -39,15 +41,24 @@ def veritabani_olustur():
         gizli_enlem = gercek_enlem + SALT_LAT
         gizli_boylam = gercek_boylam + SALT_LON
         
-        # Veritabanına şifrelenmiş haliyle kaydediyoruz
+        # Veritabanına şifrelenmiş haliyle ve hat logolarıyla kaydediyoruz
         cursor.execute('''
-            INSERT INTO cikislar (cikis_id, istasyon_adi, cikis_adi, cikis_no, tuzlu_enlem, tuzlu_boylam)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (row["cikis_id"], row["istasyon_adi"], row["cikis_adi"], row["cikis_no"], gizli_enlem, gizli_boylam))
+            INSERT INTO cikislar (cikis_id, istasyon_adi, hat_kodu, hat_rengi, cikis_adi, cikis_no, tuzlu_enlem, tuzlu_boylam)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            row["cikis_id"], 
+            row["istasyon_adi"], 
+            row["hat_kodu"], 
+            row["hat_rengi"], 
+            row["cikis_adi"], 
+            row["cikis_no"], 
+            gizli_enlem, 
+            gizli_boylam
+        ))
     
     conn.commit()
     conn.close()
-    print("Sadeleştirilmiş CSV, tuzlama (güvenlik) katmanından geçirilerek veritabanına başarıyla kaydedildi!")
+    print("Sadeleştirilmiş CSV (POINT formatı), hat renkleri ve tuzlama katmanıyla veritabanına başarıyla kaydedildi!")
 
 if __name__ == "__main__":
     veritabani_olustur()
