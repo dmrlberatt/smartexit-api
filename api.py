@@ -20,9 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Kendi Mapbox Token'ın
-MAPBOX_TOKEN = "pk.eyJ1IjoieGVvbm9yZXMiLCJhIjoiY21wYXVjOWY1MDBrNDJ0cjJuYjltY3duaCJ9.fh1c6d7kL2NokI_nKwVEJA"
-
 # YENİ ENDPOINT: Flutter'ın açılışta veya kullanıcı yazarken pembe/renkli logolarla durakları listelemesini sağlayan fonksiyon
 @app.get("/api/v1/istasyonlar")
 async def istasyonlari_listele():
