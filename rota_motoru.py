@@ -6,7 +6,7 @@ def yurume_rotasi_cek(baslangic_enlem, baslangic_boylam, hedef_enlem, hedef_boyl
     tüm viraj ve dönemeç koordinatlarını bir liste olarak döndürür.
     """
     # OSRM koordinatları (Boylam, Enlem) formatında ister
-    url = f"http://router.project-osrm.org/route/v1/foot/{baslangic_boylam},{baslangic_enlem};{hedef_boylam},{hedef_enlem}?overview=full&geometries=geojson"
+    url = f"http://localhost:5000/route/v1/foot/{baslangic_boylam},{baslangic_enlem};{hedef_boylam},{hedef_enlem}?overview=full&geometries=geojson"
     
     try:
         # ZIRH: OSRM bizi bot sanıp engellemesin diye kendimizi tanıtıyoruz.
