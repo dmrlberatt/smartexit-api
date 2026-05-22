@@ -43,14 +43,14 @@ def veritabani_olustur():
         gizli_boylam = gercek_boylam + SALT_LON
         
         # Veritabanına şifrelenmiş haliyle ve hat logolarıyla kaydediyoruz
-        cursor.execute('''
-            INSERT INTO cikislar (cikis_id, istasyon_adi, hat_kodu, hat_rengi, cikis_no, tuzlu_enlem, tuzlu_boylam, cikis_adi)
+       cursor.execute('''
+            INSERT OR REPLACE INTO cikislar (cikis_id, istasyon_adi, hat_kodu, hat_rengi, cikis_no, tuzlu_enlem, tuzlu_boylam, cikis_adi)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             row["cikis_id"], 
             row["istasyon_adi"], 
             row["hat_kodu"], 
-            row["hat_rengi"], 
+            str(row["hat_rengi"]).strip(),  # <-- BOŞLUKLARI SİLEN SİHİRLİ KOD BURADA
             row["cikis_no"], 
             gizli_enlem, 
             gizli_boylam,
