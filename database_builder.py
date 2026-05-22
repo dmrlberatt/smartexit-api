@@ -20,8 +20,8 @@ def veritabani_olustur():
             hat_rengi TEXT,
             cikis_no INTEGER,
             tuzlu_enlem REAL NOT NULL,
-            tuzlu_boylam REAL NOT NULL
-            cikis_adi TEXT,
+            tuzlu_boylam REAL NOT NULL,
+            cikis_adi TEXT
         )
     ''')
     
@@ -52,8 +52,8 @@ def veritabani_olustur():
             row["hat_rengi"], 
             row["cikis_no"], 
             gizli_enlem, 
-            gizli_boylam
-            row["cikis_adi"], 
+            gizli_boylam,
+            row["cikis_adi"]
         ))
     
     conn.commit()
