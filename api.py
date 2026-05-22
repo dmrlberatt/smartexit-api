@@ -140,4 +140,4 @@ async def cikis_optimize_et(istasyon_adi: str, hat_kodu: str, hedef_lat: float, 
         raise HTTPException(status_code=500, detail=f"Sistem Hatası: {str(e)}")
 
 if __name__ == "__main__":
-    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api:app", host="0.0.0.0", port=8080, reload=True)
