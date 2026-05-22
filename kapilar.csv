@@ -35,7 +35,6 @@ umraniye_M5_2, Ümraniye, M5, #62307F, 2, "POINT(29.0843423 41.0251405)", "Bulun
 bulgurlu_M5_2, Bulgurlu, M5, #62307F, 2, "POINT(29.0755306 41.0166804)", "Bulunacak"
 bulgurlu_M5_1, Bulgurlu, M5, #62307F, 1, "POINT(29.076261 41.0162219)", "Bulunacak"
 kisikli_M5_1, Kısıklı, M5, #62307F, 1, "POINT(29.0627483 41.0221777)", "Bulunacak"
-altunizade_M5_7, Altunizade, M5, #62307F, 7, "POINT(29.0451475 41.0194523)", "Bulunacak"
 baglarbasi_M5_1, Bağlarbaşı, M5, #62307F, 1, "POINT(29.0389128 41.0215158)", "Bulunacak"
 baglarbasi_M5_2, Bağlarbaşı, M5, #62307F, 2, "POINT(29.0384755 41.0211185)", "Bulunacak"
 baglarbasi_M5_3, Bağlarbaşı, M5, #62307F, 3, "POINT(29.0355033 41.0211132)", "Bulunacak"
@@ -94,5 +93,4 @@ kagithane_M11_1, Kağıthane, M11, #A85A94, 1, "POINT(28.9758727 41.080413)", "B
 uskudar_marmaray_harem, Üsküdar, Marmaray, #66656A, 0, "POINT(29.0129252 41.0257067)", "Harem Çıkışı"
 uskudar_marmaray_uskudar, Üsküdar, Marmaray, #66656A, 0, "POINT(29.0134996 41.0257827)", "Üsküdar Meydan Çıkışı"
 uskudar_marmaray_hakimiyeti, Üsküdar, Marmaray, #66656A, 0, "POINT(29.0150486 41.0255416)", "Hakimiyet-i Milliye"
-uskudar_marmaray_uskudar, Üsküdar, Marmaray, #66656A, 0, "POINT(29.0136629 41.0258084)", "Üsküdar Meydan"
 uskudar_marmaray_vapur, Üsküdar, Marmaray, #66656A, 0, "POINT(29.0147969 41.0263342)", "Vapur İskelesi"
