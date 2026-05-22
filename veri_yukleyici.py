@@ -25,10 +25,10 @@ def veritabanini_hazirla():
         CREATE TABLE kapilar (
             id TEXT PRIMARY KEY,
             istasyon_id TEXT,
-            cikis_numarasi TEXT NOT NULL,  -- YENİ EKLENEN SÜTUN!
-            kapi_ismi TEXT NOT NULL,       -- Eski "kapi_no" artık daha anlamlı bir isim aldı
+            cikis_numarasi TEXT NOT NULL,  -- YENİ EKLENEN SÜTUN!      
             tuzlu_enlem REAL NOT NULL,
             tuzlu_boylam REAL NOT NULL,
+            kapi_ismi TEXT, 
             asansor_var_mi INTEGER DEFAULT 0,
             FOREIGN KEY (istasyon_id) REFERENCES istasyonlar (id)
         )
