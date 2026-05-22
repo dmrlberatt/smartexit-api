@@ -18,10 +18,10 @@ def veritabani_olustur():
             istasyon_adi TEXT NOT NULL,
             hat_kodu TEXT,
             hat_rengi TEXT,
-            cikis_adi TEXT NOT NULL,
             cikis_no INTEGER,
             tuzlu_enlem REAL NOT NULL,
             tuzlu_boylam REAL NOT NULL
+            cikis_adi TEXT,
         )
     ''')
     
@@ -43,17 +43,17 @@ def veritabani_olustur():
         
         # Veritabanına şifrelenmiş haliyle ve hat logolarıyla kaydediyoruz
         cursor.execute('''
-            INSERT INTO cikislar (cikis_id, istasyon_adi, hat_kodu, hat_rengi, cikis_adi, cikis_no, tuzlu_enlem, tuzlu_boylam)
+            INSERT INTO cikislar (cikis_id, istasyon_adi, hat_kodu, hat_rengi, cikis_no, tuzlu_enlem, tuzlu_boylam, cikis_adi)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             row["cikis_id"], 
             row["istasyon_adi"], 
             row["hat_kodu"], 
             row["hat_rengi"], 
-            row["cikis_adi"], 
             row["cikis_no"], 
             gizli_enlem, 
             gizli_boylam
+            row["cikis_adi"], 
         ))
     
     conn.commit()
