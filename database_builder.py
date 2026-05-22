@@ -33,7 +33,8 @@ def veritabani_olustur():
     # Her bir satırı dönüp POINT formatını parçalıyor ve tuzluyoruz
     for index, row in df.iterrows():
         # POINT(boylam enlem) yapısını shapely ile okuyoruz
-        geometri = loads(row["koordinat"])
+        temiz_koordinat = str(row["koordinat"]).replace('"', '').strip()
+        geometri = loads(temiz_koordinat)
         gercek_boylam = geometri.x
         gercek_enlem = geometri.y
         
