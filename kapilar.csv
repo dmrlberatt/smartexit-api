@@ -1,95 +1,95 @@
 cikis_id,  istasyon_adi,  hat_kodu,  hat_rengi,  cikis_no,  koordinat, cikis_adi
-uskudar_M5_4, Üsküdar, M5, #62307F, 4, POINT(29.0116056 41.0251789), " "
-uskudar_M5_3, Üsküdar, M5, #62307F, 3, POINT(29.0125922 41.025343), " "
-uskudar_M5_2, Üsküdar, M5, #62307F, 2, POINT(29.0128046 41.0253734), " "
-uskudar_M5_1, Üsküdar, M5, #62307F, 1, POINT(29.0140049 41.0256074), " "
-altunizade_M5_7, Altunizade, M5, #62307F, 7, POINT(29.04515 41.01945), " "
-altunizade_M5_6, Altunizade, M5, #62307F, 6, POINT(29.045349 41.0227657), " "
-altunizade_M5_5, Altunizade, M5, #62307F, 5, POINT(29.0456129 41.0221562), " "
-altunizade_M5_4, Altunizade, M5, #62307F, 4, POINT(29.0475448 41.0220107), " "
-altunizade_M5_3, Altunizade, M5, #62307F, 3, POINT(29.0490362 41.0223134), " "
-altunizade_M5_2, Altunizade, M5, #62307F, 2, POINT(29.0504078 41.0225207), " "
-altunizade_M5_1, Altunizade, M5, #62307F, 1, POINT(29.0480936 41.0234992), " "
-cekmekoy_M5_1, Çekmeköy, M5, #62307F, 1, POINT(29.189942 41.0145218), " "
-cekmekoy_M5_2, Çekmeköy, M5, #62307F, 2, POINT(29.1890843 41.0146072), " "
-necip_fazil_M5_1, Necip Fazıl, M5, #62307F, 1, POINT(29.1799981 41.0157323), " "
-necip_fazil_M5_2, Necip Fazıl, M5, #62307F, 2, POINT(29.179157 41.0161169), " "
-necip_fazil_M5_3, Necip Fazıl, M5, #62307F, 3, POINT(29.1790909 41.0164414), " "
-dudullu_M5_1, Dudullu, M5, #62307F, 1, POINT(29.1633959 41.0155862), " "
-dudullu_M5_2, Dudullu, M5, #62307F, 2, POINT(29.1633423 41.015138), " "
-imam_hatip_lisesi_M5_1, İmam Hatip Lisesi, M5, #62307F, 1, POINT(29.1518775 41.0159536), " "
-imam_hatip_lisesi_M5_2, İmam Hatip Lisesi, M5, #62307F, 2, POINT(29.15122 41.0157648), " "
-altinsehir_M5_2, Altınşehir, M5, #62307F, 2, POINT(29.1398925 41.0167686), " "
-altinsehir_M5_1, Altınşehir, M5, #62307F, 1, POINT(29.1401525 41.0164056), " "
-ihlamurkuyu_M5_1, Ihlamurkuyu, M5, #62307F, 1, POINT(29.131403 41.0193822), " "
-ihlamurkuyu_M5_2, Ihlamurkuyu, M5, #62307F, 2, POINT(29.1301233 41.0201474), " "
-cakmak_M5_1, Çakmak, M5, #62307F, 1, POINT(29.1192156 41.0213895), " "
-cakmak_M5_2, Çakmak, M5, #62307F, 2, POINT(29.1177932 41.0218015), " "
-yamanevler_M5_1, Yamanevler, M5, #62307F, 1, POINT(29.1092649 41.0242837), " "
-yamanevler_M5_2, Yamanevler, M5, #62307F, 2, POINT(29.1070801 41.0244798), " "
-carsi_M5_1, Çarşı, M5, #62307F, 1, POINT(29.0972238 41.0259729), " "
-carsi_M5_2, Çarşı, M5, #62307F, 2, POINT(29.0966512 41.0260634), " "
-carsi_M5_3, Çarşı, M5, #62307F, 3, POINT(29.0964707 41.0262534), " "
-umraniye_M5_1, Ümraniye, M5, #62307F, 1, POINT(29.0850845 41.0247147), " "
-umraniye_M5_2, Ümraniye, M5, #62307F, 2, POINT(29.0843423 41.0251405), " "
-bulgurlu_M5_2, Bulgurlu, M5, #62307F, 2, POINT(29.0755306 41.0166804), " "
-bulgurlu_M5_1, Bulgurlu, M5, #62307F, 1, POINT(29.076261 41.0162219), " "
-kisikli_M5_1, Kısıklı, M5, #62307F, 1, POINT(29.0627483 41.0221777), " "
-baglarbasi_M5_1, Bağlarbaşı, M5, #62307F, 1, POINT(29.0389128 41.0215158), " "
-baglarbasi_M5_2, Bağlarbaşı, M5, #62307F, 2, POINT(29.0384755 41.0211185), " "
-baglarbasi_M5_3, Bağlarbaşı, M5, #62307F, 3, POINT(29.0355033 41.0211132), " "
-baglarbasi_M5_4, Bağlarbaşı, M5, #62307F, 4, POINT(29.0352274 41.0213084), " "
-baglarbasi_M5_5, Bağlarbaşı, M5, #62307F, 5, POINT(29.0354692 41.0217461), " "
-fistikagaci_M5_1, Fıstıkağacı, M5, #62307F, 1, POINT(29.0287801 41.02822), " "
-fulya_M7_2, Fulya, M7, #F29EBF, 2, POINT(29.0068381 41.0625306), " "
-fulya_M7_1, Fulya, M7, #F29EBF, 1, POINT(29.0070784 41.0618931), " "
-yildiz_M7_3, Yıldız, M7, #F29EBF, 3, POINT(29.008306 41.0523992), " "
-yildiz_M7_2, Yıldız, M7, #F29EBF, 2, POINT(29.0097462 41.0551662), " "
+uskudar_M5_4, Üsküdar, M5, #62307F, 4, POINT(29.0116056 41.0251789), 
+uskudar_M5_3, Üsküdar, M5, #62307F, 3, POINT(29.0125922 41.025343), 
+uskudar_M5_2, Üsküdar, M5, #62307F, 2, POINT(29.0128046 41.0253734), 
+uskudar_M5_1, Üsküdar, M5, #62307F, 1, POINT(29.0140049 41.0256074), 
+altunizade_M5_7, Altunizade, M5, #62307F, 7, POINT(29.04515 41.01945), 
+altunizade_M5_6, Altunizade, M5, #62307F, 6, POINT(29.045349 41.0227657), 
+altunizade_M5_5, Altunizade, M5, #62307F, 5, POINT(29.0456129 41.0221562), 
+altunizade_M5_4, Altunizade, M5, #62307F, 4, POINT(29.0475448 41.0220107), 
+altunizade_M5_3, Altunizade, M5, #62307F, 3, POINT(29.0490362 41.0223134), 
+altunizade_M5_2, Altunizade, M5, #62307F, 2, POINT(29.0504078 41.0225207), 
+altunizade_M5_1, Altunizade, M5, #62307F, 1, POINT(29.0480936 41.0234992), 
+cekmekoy_M5_1, Çekmeköy, M5, #62307F, 1, POINT(29.189942 41.0145218), 
+cekmekoy_M5_2, Çekmeköy, M5, #62307F, 2, POINT(29.1890843 41.0146072), 
+necip_fazil_M5_1, Necip Fazıl, M5, #62307F, 1, POINT(29.1799981 41.0157323), 
+necip_fazil_M5_2, Necip Fazıl, M5, #62307F, 2, POINT(29.179157 41.0161169), 
+necip_fazil_M5_3, Necip Fazıl, M5, #62307F, 3, POINT(29.1790909 41.0164414), 
+dudullu_M5_1, Dudullu, M5, #62307F, 1, POINT(29.1633959 41.0155862), 
+dudullu_M5_2, Dudullu, M5, #62307F, 2, POINT(29.1633423 41.015138), 
+imam_hatip_lisesi_M5_1, İmam Hatip Lisesi, M5, #62307F, 1, POINT(29.1518775 41.0159536), 
+imam_hatip_lisesi_M5_2, İmam Hatip Lisesi, M5, #62307F, 2, POINT(29.15122 41.0157648), 
+altinsehir_M5_2, Altınşehir, M5, #62307F, 2, POINT(29.1398925 41.0167686), 
+altinsehir_M5_1, Altınşehir, M5, #62307F, 1, POINT(29.1401525 41.0164056), 
+ihlamurkuyu_M5_1, Ihlamurkuyu, M5, #62307F, 1, POINT(29.131403 41.0193822), 
+ihlamurkuyu_M5_2, Ihlamurkuyu, M5, #62307F, 2, POINT(29.1301233 41.0201474), 
+cakmak_M5_1, Çakmak, M5, #62307F, 1, POINT(29.1192156 41.0213895), 
+cakmak_M5_2, Çakmak, M5, #62307F, 2, POINT(29.1177932 41.0218015), 
+yamanevler_M5_1, Yamanevler, M5, #62307F, 1, POINT(29.1092649 41.0242837), 
+yamanevler_M5_2, Yamanevler, M5, #62307F, 2, POINT(29.1070801 41.0244798), 
+carsi_M5_1, Çarşı, M5, #62307F, 1, POINT(29.0972238 41.0259729), 
+carsi_M5_2, Çarşı, M5, #62307F, 2, POINT(29.0966512 41.0260634), 
+carsi_M5_3, Çarşı, M5, #62307F, 3, POINT(29.0964707 41.0262534), 
+umraniye_M5_1, Ümraniye, M5, #62307F, 1, POINT(29.0850845 41.0247147), 
+umraniye_M5_2, Ümraniye, M5, #62307F, 2, POINT(29.0843423 41.0251405), 
+bulgurlu_M5_2, Bulgurlu, M5, #62307F, 2, POINT(29.0755306 41.0166804), 
+bulgurlu_M5_1, Bulgurlu, M5, #62307F, 1, POINT(29.076261 41.0162219), 
+kisikli_M5_1, Kısıklı, M5, #62307F, 1, POINT(29.0627483 41.0221777), 
+baglarbasi_M5_1, Bağlarbaşı, M5, #62307F, 1, POINT(29.0389128 41.0215158), 
+baglarbasi_M5_2, Bağlarbaşı, M5, #62307F, 2, POINT(29.0384755 41.0211185), 
+baglarbasi_M5_3, Bağlarbaşı, M5, #62307F, 3, POINT(29.0355033 41.0211132), 
+baglarbasi_M5_4, Bağlarbaşı, M5, #62307F, 4, POINT(29.0352274 41.0213084), 
+baglarbasi_M5_5, Bağlarbaşı, M5, #62307F, 5, POINT(29.0354692 41.0217461), 
+fistikagaci_M5_1, Fıstıkağacı, M5, #62307F, 1, POINT(29.0287801 41.02822), 
+fulya_M7_2, Fulya, M7, #F29EBF, 2, POINT(29.0068381 41.0625306), 
+fulya_M7_1, Fulya, M7, #F29EBF, 1, POINT(29.0070784 41.0618931), 
+yildiz_M7_3, Yıldız, M7, #F29EBF, 3, POINT(29.008306 41.0523992), 
+yildiz_M7_2, Yıldız, M7, #F29EBF, 2, POINT(29.0097462 41.0551662), 
 karadeniz_mahallesi_M7_4, Karadeniz Mahallesi, M7, #F29EBF, 4, POINT(28.8755302 41.0799371), "Metris Cezaevi"
 karadeniz_mahallesi_M7_3, Karadeniz Mahallesi, M7, #F29EBF, 3, POINT(28.8758474 41.0803305), "Viaport Venezia"
-karadeniz_mahallesi_M7_1, Karadeniz Mahallesi, M7, #F29EBF, 1, POINT(28.8750225 41.0812567), " "
+karadeniz_mahallesi_M7_1, Karadeniz Mahallesi, M7, #F29EBF, 1, POINT(28.8750225 41.0812567), 
 karadeniz_mahallesi_M7_5, Karadeniz Mahallesi, M7, #F29EBF, 5, POINT(28.8749893 41.0809351), "T4 Tramvay Aktarma"
-karadeniz_mahallesi_M7_2, Karadeniz Mahallesi, M7, #F29EBF, 2, POINT(28.8766446 41.0816886), " "
-yenimahalle_metro_M7_2, Yenimahalle Metro, M7, #F29EBF, 2, POINT(28.8921285 41.0841569), " "
-yenimahalle_M7_1, Yenimahalle, M7, #F29EBF, 1, POINT(28.8935465 41.0836861), " "
-kazim_karabekir_M7_4, Kazım Karabekir, M7, #F29EBF, 4, POINT(28.9067327 41.0855471), " "
-kazim_karabekir_M7_3, Kazım Karabekir, M7, #F29EBF, 3, POINT(28.9067169 41.085193), " "
-kazim_karabekir_M7_2, Kazım Karabekir, M7, #F29EBF, 2, POINT(28.9100792 41.0845418), " "
-kazim_karabekir_M7_1, Kazım Karabekir, M7, #F29EBF, 1, POINT(28.910417 41.0848979), " "
-yesilpinar_M7_3, Yeşilpınar, M7, #F29EBF, 3, POINT(28.9160808 41.0823748), " "
-yesilpinar_M7_2, Yeşilpınar, M7, #F29EBF, 2, POINT(28.9193863 41.0819716), " "
-veysel_karani_M7_4, Veysel Karani, M7, #F29EBF, 4, POINT(28.9269975 41.079742), " "
-veysel_karani_M7_3, Veysel Karani, M7, #F29EBF, 3, POINT(28.9277822 41.0794146), " "
-veysel_karani_M7_1, Veysel Karani, M7, #F29EBF, 1, POINT(28.929003 41.0799109), " "
-veysel_karani_M7_2, Veysel Karani, M7, #F29EBF, 2, POINT(28.9296519 41.0797297), " "
-circir_M7_3, Çırçır, M7, #F29EBF, 3, POINT(28.935183 41.0800259), " "
-circir_M7_2, Çırçır, M7, #F29EBF, 2, POINT(28.9360336 41.0803656), " "
-circir_M7_1, Çırçır, M7, #F29EBF, 1, POINT(28.9375434 41.0799767), " "
-alibeykoy_M7_2, Alibeyköy, M7, #F29EBF, 2, POINT(28.9484598 41.079225), " "
-alibeykoy_M7_1, Alibeyköy, M7, #F29EBF, 1, POINT(28.9507542 41.0790602), " "
-nurtepe_M7_3, Nurtepe, M7, #F29EBF, 3, POINT(28.9628279 41.0794238), " "
-nurtepe_M7_2, Nurtepe, M7, #F29EBF, 2, POINT(28.9632579 41.0800041), " "
-nurtepe_M7_1, Nurtepe, M7, #F29EBF, 1, POINT(28.9649662 41.0803155), " "
-kagithane_M7_1, Kağıthane, M7, #F29EBF, 1, POINT(28.9743671 41.0792152), " "
-kagithane_M7_2, Kağıthane, M7, #F29EBF, 2, POINT(28.9723207 41.0799341), " "
-caglayan_M7_3, Çağlayan, M7, #F29EBF, 3, POINT(28.9792709 41.0712118), " "
-caglayan_M7_2, Çağlayan, M7, #F29EBF, 2, POINT(28.9801611 41.0710416), " "
-caglayan_M7_1, Çağlayan, M7, #F29EBF, 1, POINT(28.9825864 41.0694632), " "
-tekstilkent_giyimkent_M7_2, Tekstilkent - Giyimkent, M7, #F29EBF, 2, POINT(28.8684281 41.0717983), " "
-tekstilkent_giyimkent_M7_1, Tekstilkent - Giyimkent, M7, #F29EBF, 1, POINT(28.8675198 41.0716122), " "
-tekstilkent_giyimkent_M7_3, Tekstilkent - Giyimkent, M7, #F29EBF, 3, POINT(28.8660956 41.0700817), " "
-oruc_reis_yuzyil_M7_1, Oruç Reis - Yüzyıl, M7, #F29EBF, 1, POINT(28.8558912 41.0636188), " "
-oruc_reis_yuzyil_M7_2, Oruç Reis - Yüzyıl, M7, #F29EBF, 2, POINT(28.8545768 41.060664), " "
-goztepe_M7_4, Göztepe, M7, #F29EBF, 4, POINT(28.8462902 41.0571083), " "
-goztepe_M7_3, Göztepe, M7, #F29EBF, 3, POINT(28.8471525 41.0564223), " "
-goztepe_M7_1, Göztepe, M7, #F29EBF, 1, POINT(28.8486353 41.0573147), " "
-goztepe_M7_2, Göztepe, M7, #F29EBF, 2, POINT(28.8499236 41.0566856), " "
+karadeniz_mahallesi_M7_2, Karadeniz Mahallesi, M7, #F29EBF, 2, POINT(28.8766446 41.0816886), 
+yenimahalle_metro_M7_2, Yenimahalle Metro, M7, #F29EBF, 2, POINT(28.8921285 41.0841569), 
+yenimahalle_M7_1, Yenimahalle, M7, #F29EBF, 1, POINT(28.8935465 41.0836861), 
+kazim_karabekir_M7_4, Kazım Karabekir, M7, #F29EBF, 4, POINT(28.9067327 41.0855471), 
+kazim_karabekir_M7_3, Kazım Karabekir, M7, #F29EBF, 3, POINT(28.9067169 41.085193), 
+kazim_karabekir_M7_2, Kazım Karabekir, M7, #F29EBF, 2, POINT(28.9100792 41.0845418), 
+kazim_karabekir_M7_1, Kazım Karabekir, M7, #F29EBF, 1, POINT(28.910417 41.0848979), 
+yesilpinar_M7_3, Yeşilpınar, M7, #F29EBF, 3, POINT(28.9160808 41.0823748), 
+yesilpinar_M7_2, Yeşilpınar, M7, #F29EBF, 2, POINT(28.9193863 41.0819716), 
+veysel_karani_M7_4, Veysel Karani, M7, #F29EBF, 4, POINT(28.9269975 41.079742), 
+veysel_karani_M7_3, Veysel Karani, M7, #F29EBF, 3, POINT(28.9277822 41.0794146), 
+veysel_karani_M7_1, Veysel Karani, M7, #F29EBF, 1, POINT(28.929003 41.0799109), 
+veysel_karani_M7_2, Veysel Karani, M7, #F29EBF, 2, POINT(28.9296519 41.0797297), 
+circir_M7_3, Çırçır, M7, #F29EBF, 3, POINT(28.935183 41.0800259), 
+circir_M7_2, Çırçır, M7, #F29EBF, 2, POINT(28.9360336 41.0803656), 
+circir_M7_1, Çırçır, M7, #F29EBF, 1, POINT(28.9375434 41.0799767), 
+alibeykoy_M7_2, Alibeyköy, M7, #F29EBF, 2, POINT(28.9484598 41.079225), 
+alibeykoy_M7_1, Alibeyköy, M7, #F29EBF, 1, POINT(28.9507542 41.0790602), 
+nurtepe_M7_3, Nurtepe, M7, #F29EBF, 3, POINT(28.9628279 41.0794238), 
+nurtepe_M7_2, Nurtepe, M7, #F29EBF, 2, POINT(28.9632579 41.0800041), 
+nurtepe_M7_1, Nurtepe, M7, #F29EBF, 1, POINT(28.9649662 41.0803155), 
+kagithane_M7_1, Kağıthane, M7, #F29EBF, 1, POINT(28.9743671 41.0792152), 
+kagithane_M7_2, Kağıthane, M7, #F29EBF, 2, POINT(28.9723207 41.0799341), 
+caglayan_M7_3, Çağlayan, M7, #F29EBF, 3, POINT(28.9792709 41.0712118), 
+caglayan_M7_2, Çağlayan, M7, #F29EBF, 2, POINT(28.9801611 41.0710416), 
+caglayan_M7_1, Çağlayan, M7, #F29EBF, 1, POINT(28.9825864 41.0694632), 
+tekstilkent_giyimkent_M7_2, Tekstilkent - Giyimkent, M7, #F29EBF, 2, POINT(28.8684281 41.0717983), 
+tekstilkent_giyimkent_M7_1, Tekstilkent - Giyimkent, M7, #F29EBF, 1, POINT(28.8675198 41.0716122), 
+tekstilkent_giyimkent_M7_3, Tekstilkent - Giyimkent, M7, #F29EBF, 3, POINT(28.8660956 41.0700817), 
+oruc_reis_yuzyil_M7_1, Oruç Reis - Yüzyıl, M7, #F29EBF, 1, POINT(28.8558912 41.0636188), 
+oruc_reis_yuzyil_M7_2, Oruç Reis - Yüzyıl, M7, #F29EBF, 2, POINT(28.8545768 41.060664), 
+goztepe_M7_4, Göztepe, M7, #F29EBF, 4, POINT(28.8462902 41.0571083), 
+goztepe_M7_3, Göztepe, M7, #F29EBF, 3, POINT(28.8471525 41.0564223), 
+goztepe_M7_1, Göztepe, M7, #F29EBF, 1, POINT(28.8486353 41.0573147), 
+goztepe_M7_2, Göztepe, M7, #F29EBF, 2, POINT(28.8499236 41.0566856), 
 mecidiyekoy_M7_6, Mecidiyeköy, M7, #F29EBF, 6, POINT(28.9972083 41.0648966), "İtfaiye"
 mecidiyekoy_M7_5, Mecidiyeköy, M7, #F29EBF, 5, POINT(28.9966374 41.0656074), "Garaj Sokak"
 mecidiyekoy_M7_2, Mecidiyeköy, M7, #F29EBF, 2, POINT(28.9946389 41.0661818), "Meydan - Büyükdere Caddesi"
 mecidiyekoy_M7_3, Mecidiyeköy, M7, #F29EBF, 3, POINT(28.9955221 41.0660518), "Ortaklar Caddesi"
 mecidiyekoy_M7_1, Mecidiyeköy, M7, #F29EBF, 1, POINT(28.9930362 41.0662404), "Metrobüs Bağlantısı"
-kagithane_M11_1, Kağıthane, M11, #A85A94, 1, POINT(28.9758727 41.080413), " "
+kagithane_M11_1, Kağıthane, M11, #A85A94, 1, POINT(28.9758727 41.080413), 
 uskudar_marmaray_harem, Üsküdar, B1, #66656A, 0, POINT(29.0129252 41.0257067), "Harem Çıkışı"
 uskudar_marmaray_uskudar, Üsküdar, B1, #66656A, 0, POINT(29.0134996 41.0257827), "Üsküdar Meydan Çıkışı"
 uskudar_marmaray_hakimiyeti, Üsküdar, B1, #66656A, 0, POINT(29.0150486 41.0255416), "Hakimiyet-i Milliye"
