@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware # YENİ: CORS middleware içeri aktarıldı
 import requests
-from geo_hesaplama import en_iyi_cikislari_bul, istasyon_duraklarini_getir # YENİ: durak getirme eklendi
+from geo_hesaplama import en_iyi_cikislari_bul, istasyon_duraklarini_getir, tum_cikis_koordinatlarini_getir
 from rota_motoru import yurume_rotasi_cek
 import uvicorn
 
