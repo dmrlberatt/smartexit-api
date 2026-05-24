@@ -25,6 +25,19 @@ def istasyon_kapilarini_getir(istasyon_adi: str, hat_kodu: str):
     geometriler = [Point(xy) for xy in zip(df['gercek_boylam'], df['gercek_enlem'])]
     gdf = gpd.GeoDataFrame(df, geometry=geometriler, crs="EPSG:4326")
     return gdf
+def tum_cikis_koordinatlarini_getir():
+    """Haritada göstermek için tüm çıkışların koordinatlarını döndürür."""
+    conn = sqlite3.connect("smartexit.db")
+    query = """
+    SELECT cikis_id, istasyon_adi, hat_kodu, hat_rengi, 
+           cikis_no, cikis_adi,
+           tuzlu_enlem - 0.0050 as enlem,
+           tuzlu_boylam + 0.0030 as boylam
+    FROM cikislar
+    """
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    return df.to_dict('records')
 
 def osrm_table_mesafe(hedef_boylam: float, hedef_enlem: float, cikis_listesi: list) -> list:
     """
