@@ -29,7 +29,7 @@ def veritabani_olustur():
     df = pd.read_csv("kapilar.csv")
     # Sütun isimlerindeki o sinsi boşlukları otomatik temizle!
     df.columns = df.columns.str.strip()
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)  # Değerleri de temizle
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
     
     # Her bir satırı dönüp POINT formatını parçalıyor ve tuzluyoruz
     for index, row in df.iterrows():
