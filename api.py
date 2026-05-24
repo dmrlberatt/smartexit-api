@@ -62,6 +62,11 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
 
     return {"durum": "basarili", "sonuclar": sonuclar[:5]}
 
+@app.get("/api/v1/tum-cikislar")
+async def tum_cikislari_getir():
+    """Haritada göstermek için tüm çıkış noktalarını döndürür."""
+    return tum_cikis_koordinatlarini_getir()
+
 
 @app.get("/api/v1/en-iyi-cikis")
 async def cikis_optimize_et(istasyon_adi: str, hat_kodu: str, hedef_lat: float, gateway_lon: float = None, hedef_lon: float = None, asansor_sart: bool = False):
