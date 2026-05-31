@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware # YENİ: CORS middleware içeri aktarıldı
+from fastapi.middleware.cors import CORSMiddleware # CORS middleware içeri aktarıldı
 import requests
 from geo_hesaplama import en_iyi_cikislari_bul, istasyon_duraklarini_getir, tum_cikis_koordinatlarini_getir
 from rota_motoru import yurume_rotasi_cek
@@ -11,7 +11,7 @@ app = FastAPI(
     version="3.0.0"
 )
 
-# YENİ: Chrome (Web) ve diğer platformların CORS engeline takılmaması için güvenlik izinleri
+#  Chrome (Web) ve diğer platformların CORS engeline takılmaması için güvenlik izinleri
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], # Her yerden gelen isteğe izin ver
@@ -20,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# YENİ ENDPOINT: Flutter'ın açılışta veya kullanıcı yazarken pembe/renkli logolarla durakları listelemesini sağlayan fonksiyon
+# ENDPOINT: Flutter'ın açılışta veya kullanıcı yazarken pembe/renkli logolarla durakları listelemesini sağlayan fonksiyon
 @app.get("/api/v1/istasyonlar")
 async def istasyonlari_listele():
     """Flutter açılışta veya kullanıcı yazarken yerel durakları (renkleriyle) dönen sıfır maliyetli link"""
