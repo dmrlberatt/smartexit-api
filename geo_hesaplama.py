@@ -105,11 +105,11 @@ def en_iyi_cikislari_bul(istasyon_adi: str, hat_kodu: str, hedef_enlem: float, h
     osrm_mesafeler = osrm_table_mesafe(hedef_boylam, hedef_enlem, cikis_listesi)
 
     if osrm_mesafeler and len(osrm_mesafeler) == len(gdf):
-        # OSRM başarılı — gerçek mesafeleri kullan
+        # OSRM başarılı ise — gerçek mesafeleri kullan
         gdf['mesafe_metre'] = osrm_mesafeler
         print("OSRM table ile gerçek yürüyüş mesafesi kullanıldı.")
     else:
-        # OSRM başarısız — kuş uçuşuna düş
+        # OSRM başarısız ise — kuş uçuşuna düş
         print("OSRM table başarısız, kuş uçuşu mesafeye geçildi.")
         gdf['mesafe_metre'] = gdf.apply(
             lambda row: kuş_ucusu_mesafe(row['gercek_enlem'], row['gercek_boylam'], hedef_enlem, hedef_boylam),
