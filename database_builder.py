@@ -10,7 +10,7 @@ def veritabani_olustur():
     conn = sqlite3.connect("smartexit.db")
     cursor = conn.cursor()
     
-    # Yeni ve güvenli tablomuzu oluşturuyoruz
+    # Güvenli tablomuzu oluşturuyoruz
     cursor.execute("DROP TABLE IF EXISTS cikislar")
     cursor.execute('''
         CREATE TABLE cikislar (
@@ -51,7 +51,7 @@ def veritabani_olustur():
             row["cikis_id"], 
             row["istasyon_adi"], 
             row["hat_kodu"], 
-            str(row["hat_rengi"]).strip(),  # <-- BOŞLUKLARI SİLEN SİHİRLİ KOD BURADA
+            str(row["hat_rengi"]).strip(),  # <-- BOŞLUKLARI SİLEN KOD 
             row["cikis_no"], 
             gizli_enlem, 
             gizli_boylam,
