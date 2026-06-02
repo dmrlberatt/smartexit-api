@@ -11,7 +11,7 @@ app = FastAPI(
     version="3.0.0"
 )
 
-# Chrome (Web) ve diğer platformların CORS engeline takılmaması için güvenlik izinleri
+#  Chrome (Web) ve diğer platformların CORS engeline takılmaması için güvenlik izinleri
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], # Her yerden gelen isteğe izin ver
@@ -26,9 +26,6 @@ async def istasyonlari_listele():
     """Flutter açılışta veya kullanıcı yazarken yerel durakları (renkleriyle) dönen sıfır maliyetli link"""
     return istasyon_duraklarini_getir()
 
-# ========================================================
-# GÜNCELLENEN ALAN: NOMINATIM -> PHOTON GEÇİŞİ YAPILDI
-# ========================================================
 @app.get("/api/v1/yer-ara")
 async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
     if not sorgu or len(sorgu) < 2:
@@ -37,11 +34,11 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
     sonuclar = []
     
     try:
-        # Eğer telefondan GPS gelmediyse, aramayı İstanbul merkezli önceliklendiriyoruz
+        # Konum gelmezse İstanbul merkezli önceliklendiriyoruz
         lat = user_lat if user_lat is not None else 41.0082
         lon = user_lon if user_lon is not None else 28.9784
         
-        # Photon Public API endpoint'i (Limit 10 yapıldı, Türkçe dil desteği eklendi)
+        # Photon Public API parametreleri
         photon_url = "https://photon.komoot.io/api"
         photon_params = {
             "q": sorgu,
@@ -50,9 +47,9 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
             "limit": 10,
             "lang": "tr"
         }
-        
-        headers = {"User-Agent": "ExIST_Application/3.0"}
-        resp = requests.get(photon_url, params=photon_params, headers=headers, timeout=4)
+            
+        nom_headers = {"User-Agent": "SmartExitApp/3.0 (Premium)"}
+        resp = requests.get(photon_url, params=photon_params, headers=nom_headers, timeout=4)
         
         if resp.status_code == 200:
             photon_data = resp.json()
@@ -60,35 +57,31 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
             for feature in photon_data.get("features", []):
                 properties = feature.get("properties", {})
                 geometry = feature.get("geometry", {})
-                coordinates = geometry.get("coordinates", [0.0, 0.0]) # [lon, lat] düzeninde gelir
+                coordinates = geometry.get("coordinates", [0.0, 0.0]) # [lon, lat] döner
                 
                 isim = properties.get("name", "")
                 street = properties.get("street", "")
-                district = properties.get("district", "") # İlçe (Örn: Kadıköy)
-                city = properties.get("city", "")         # Şehir (Örn: İstanbul)
+                district = properties.get("district", "") # İlçe
+                city = properties.get("city", "")         # Şehir
                 
-                # Mekan adı boşsa sokak adını, o da yoksa varsayılan metni koyuyoruz
                 if not isim or not str(isim).strip():
                     isim = street if street else "Belirsiz Nokta"
                 
-                # Açıklama / Detay kısmını "İlçe, Şehir" formatında birleştiriyoruz
-                detay_olusumu = [district, city]
-                detay = ", ".join(filter(None, detay_olusumu))
+                detay_parcalari = [district, city]
+                detay = ", ".join(filter(None, detay_parcalari))
                 if not detay:
                     detay = "İstanbul"
                 
-                # Flutter tarafındaki SearchResult.fromJson modelinin beklediği TAM KEY'LER:
+                # Flutter'daki SearchResult.fromJson modelinin tam istediği key'ler
                 sonuclar.append({
                     "isim": isim,
                     "detay": detay,
-                    "lat": coordinates[1], # Enlem (latitude)
-                    "lon": coordinates[0]  # Boylam (longitude)
+                    "lat": coordinates[1], # enlem
+                    "lon": coordinates[0]  # boylam
                 })
-                
     except Exception as e:
-        print(f"Photon Motoru Hatası: {e}")
+        print(f"Photon Motoru Uyarı Verdi: {e}")
 
-    # Flutter'daki data['durum'] == 'basarili' ve data['sonuclar'] kontrolüne tam uyum:
     return {"durum": "basarili", "sonuclar": sonuclar[:5]}
 
 @app.get("/api/v1/tum-cikislar")
@@ -106,7 +99,8 @@ async def cikis_optimize_et(istasyon_adi: str, hat_kodu: str, hedef_lat: float, 
         raise HTTPException(status_code=400, detail="hedef_lon parametresi eksik.")
         
     try:
-        oneriler = en_iyi_cikislari_bul(istasyon_adi, hat_kodu, gateway_lon=lon, hedef_lat=hedef_lat) # Değişken adları geo_hesaplama'ya göre eşlendi
+        # İLK KODUNDAKİ PARAMETRE YAPISI VE SIRALAMASI BİREBİR KORUNDU
+        oneriler = en_iyi_cikislari_bul(istasyon_adi, hat_kodu, hedef_lat, lon)
         
         if not oneriler:
              raise HTTPException(status_code=404, detail="Uygun çıkış bulunamadı.")
@@ -123,7 +117,7 @@ async def cikis_optimize_et(istasyon_adi: str, hat_kodu: str, hedef_lat: float, 
         return {
             "durum": "basarili",
             "hedef": {
-                "koordinat": {"enlem": hedef_lat, "boylam": lon}
+                "koordinat": {"enlem": thresholds_lat if 'thresholds_lat' in locals() else hedef_lat, "boylam": lon}
             },
             "en_iyi_cikis": {
                 "cikis_numarasi": en_iyi_kapi['cikis_no'],
