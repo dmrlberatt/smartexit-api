@@ -34,11 +34,9 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
     sonuclar = []
     
     try:
-        # Konum gelmezse İstanbul merkezli önceliklendiriyoruz
         lat = user_lat if user_lat is not None else 41.0082
         lon = user_lon if user_lon is not None else 28.9784
         
-        # Photon Public API parametreleri
         photon_url = "https://photon.komoot.io/api"
         photon_params = {
             "q": sorgu,
@@ -57,33 +55,41 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
             for feature in photon_data.get("features", []):
                 properties = feature.get("properties", {})
                 geometry = feature.get("geometry", {})
-                coordinates = geometry.get("coordinates", [0.0, 0.0]) # [lon, lat] döner
+                coordinates = geometry.get("coordinates", [0.0, 0.0])
                 
-                isim = properties.get("name", "")
-                street = properties.get("street", "")
-                district = properties.get("district", "") # İlçe
-                city = properties.get("city", "")         # Şehir
+                # Photon'un üretebileceği tüm isim varyasyonlarını sırayla kontrol ediyoruz
+                isim = properties.get("name")
+                if not isim:
+                    isim = properties.get("street")
+                if not isim:
+                    isim = properties.get("osm_value") # Örn: "mall", "station" vs.
+                if not isim:
+                    isim = sorgu.capitalize() # Hiçbir şey bulamazsa kullanıcının yazdığını bas
                 
-                if not isim or not str(isim).strip():
-                    isim = street if street else "Belirsiz Nokta"
+                # Detay/Adres kısmını sağlama alıyoruz
+                district = properties.get("district", "")
+                city = properties.get("city", "")
+                state = properties.get("state", "")
                 
-                detay_parcalari = [district, city]
+                detay_parcalari = [district, city, state]
                 detay = ", ".join(filter(None, detay_parcalari))
-                if not detay:
-                    detay = "İstanbul"
+                if not detay or not str(detay).strip():
+                    detay = "İstanbul, Türkiye"
                 
-                # Flutter'daki SearchResult.fromJson modelinin tam istediği key'ler
                 sonuclar.append({
-                    "isim": isim,
-                    "detay": detay,
-                    "lat": coordinates[1], # enlem
-                    "lon": coordinates[0]  # boylam
+                    "isim": str(isim),
+                    "detay": str(detay),
+                    "lat": float(coordinates[1]),
+                    "lon": float(coordinates[0])
                 })
+        else:
+            print(f"Photon API Hata Kodu: {resp.status_code}")
+            
     except Exception as e:
-        print(f"Photon Motoru Uyarı Verdi: {e}")
+        print(f"Photon Döngü Hatası: {e}")
 
+    # Boş dönse bile formatın doğru olduğundan emin oluyoruz
     return {"durum": "basarili", "sonuclar": sonuclar[:5]}
-
 @app.get("/api/v1/tum-cikislar")
 async def tum_cikislari_getir():
     """Haritada göstermek için tüm çıkış noktalarını döndürür."""
