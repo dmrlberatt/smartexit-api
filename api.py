@@ -48,7 +48,7 @@ async def yer_ara(sorgu: str, user_lat: float = None, user_lon: float = None):
             "lat": lat,
             "lon": lon,
             "limit": 5,
-            "lang": "tr"
+            "lang": "default"
         }
             
         nom_headers = {
