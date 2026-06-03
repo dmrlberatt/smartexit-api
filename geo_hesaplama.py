@@ -29,14 +29,17 @@ def tum_cikis_koordinatlarini_getir():
     """Haritada göstermek için tüm çıkışların koordinatlarını döndürür."""
     conn = sqlite3.connect("smartexit.db")
     query = """
-    SELECT cikis_id, istasyon_adi, hat_kodu, hat_rengi, 
+    SELECT cikis_id, istasyon_adi, hat_kodu, hat_rengi,
            cikis_no, cikis_adi,
            tuzlu_enlem - 0.0050 as enlem,
            tuzlu_boylam + 0.0030 as boylam
     FROM cikislar
+    WHERE tuzlu_enlem IS NOT NULL AND tuzlu_boylam IS NOT NULL
     """
     df = pd.read_sql_query(query, conn)
     conn.close()
+    # NaN değerleri 0 ile değiştir
+    df = df.fillna(0)
     return df.to_dict('records')
 
 def osrm_table_mesafe(hedef_boylam: float, hedef_enlem: float, cikis_listesi: list) -> list:
