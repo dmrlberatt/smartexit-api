@@ -16,18 +16,18 @@ sağmalcılar_m1a_1,Sağmalcılar,M1A,#E32726,1,POINT(28.9072503 41.0409914),Çi
 topkapı___ulubatlı_m1a__,Topkapı - Ulubatlı,M1A,#E32726,,POINT(28.9302543 41.0243824),T4 Aktarma - İGDAŞ
 topkapı___ulubatlı_m1a__,Topkapı - Ulubatlı,M1A,#E32726,,POINT(28.9295906 41.0239391),Öğrenci Yurdu
 yenikapi_M1A_3,Yenikapı,M1A,#E32726,3,POINT(28.9508936 41.0060313),Langa Bostanı
-bağcılar_meydan_m1b__,Bağcılar Meydan,M1B,#888888,,POINT(28.8570088 41.0346419),Bağcılar Merkez Camii
-bağcılar_meydan_m1b__,Bağcılar Meydan,M1B,#888888,,POINT(28.8561447 41.03473),Çarşı Cd.
-esenler_metro_m1b__,Esenler Metro,M1B,#888888,,POINT(28.8882071 41.0367916),Köprü
-esenler_metro_m1b__,Esenler Metro,M1B,#888888,,POINT(28.8886419 41.0376981),Ferhatpaşa
-kirazlı_m1b__,Kirazlı,M1B,#888888,,POINT(28.8418115 41.0309803),Engelliler Sarayı
-kirazlı_m1b__,Kirazlı,M1B,#888888,,POINT(28.843226 41.031318),Kazım Karabekir Mh.
-kirazlı_m1b__,Kirazlı,M1B,#888888,,POINT(28.8429484 41.032388),Mevlana Cd.
-menderes_m1b__,Menderes,M1B,#888888,,POINT(28.8781853 41.042545),Menderes Mh.
-menderes_m1b__,Menderes,M1B,#888888,,POINT(28.8789486 41.0429815),Sondurak Cd.
-üçyüzlü_m1b_3,Üçyüzlü,M1B,#888888,3,POINT(28.8699272 41.0363724),Merkez Mh.
-üçyüzlü_m1b__,Üçyüzlü,M1B,#888888,,POINT(28.8710702 41.0368178),Hastane - Meydan
-üçyüzlü_m1b__,Üçyüzlü,M1B,#888888,,POINT(28.8715308 41.0371826),Cami
+bağcılar_meydan_m1b__,Bağcılar Meydan,M1B,#E32726,,POINT(28.8570088 41.0346419),Bağcılar Merkez Camii
+bağcılar_meydan_m1b__,Bağcılar Meydan,M1B,#E32726,,POINT(28.8561447 41.03473),Çarşı Cd.
+esenler_metro_m1b__,Esenler Metro,M1B,#E32726,,POINT(28.8882071 41.0367916),Köprü
+esenler_metro_m1b__,Esenler Metro,M1B,#E32726,,POINT(28.8886419 41.0376981),Ferhatpaşa
+kirazlı_m1b__,Kirazlı,M1B,#E32726,,POINT(28.8418115 41.0309803),Engelliler Sarayı
+kirazlı_m1b__,Kirazlı,M1B,#E32726,,POINT(28.843226 41.031318),Kazım Karabekir Mh.
+kirazlı_m1b__,Kirazlı,M1B,#E32726,,POINT(28.8429484 41.032388),Mevlana Cd.
+menderes_m1b__,Menderes,M1B,#E32726,,POINT(28.8781853 41.042545),Menderes Mh.
+menderes_m1b__,Menderes,M1B,#E32726,,POINT(28.8789486 41.0429815),Sondurak Cd.
+üçyüzlü_m1b_3,Üçyüzlü,M1B,#E32726,3,POINT(28.8699272 41.0363724),Merkez Mh.
+üçyüzlü_m1b__,Üçyüzlü,M1B,#E32726,,POINT(28.8710702 41.0368178),Hastane - Meydan
+üçyüzlü_m1b__,Üçyüzlü,M1B,#E32726,,POINT(28.8715308 41.0371826),Cami
 4__levent_m2__,4. Levent,M2,#F5A623,,POINT(29.0070776 41.0848023),Sapphire - Safir
 4__levent_m2__,4. Levent,M2,#F5A623,,POINT(29.0071845 41.0870376),Yeni Levent
 4__levent_m2_4,4. Levent,M2,#F5A623,4,POINT(29.0077918 41.0855928),
@@ -376,15 +376,15 @@ uskudar_B1_Harem Çıkışı,Üsküdar,B1,#66656A,Harem Çıkışı,POINT(29.012
 uskudar_B1_Vapur İskelesi,Üsküdar,B1,#66656A,Vapur İskelesi,POINT(29.0147969 41.0263342),
 uskudar_B1_Üsküdar Meydan,Üsküdar,B1,#66656A,Üsküdar Meydan,POINT(29.0136629 41.0258084),
 uskudar_B1_Üsküdar Meydan Çıkışı,Üsküdar,B1,#66656A,Üsküdar Meydan Çıkışı,POINT(29.0134996 41.0257827),Üsküdar Meydan Çıkışı
-ali_fuat_başgil_t4_a,Ali Fuat Başgil,T4,#E4002B,,POINT(28.8961452 41.0680856),
-ali_fuat_başgil_t4_b,Ali Fuat Başgil,T4,#E4002B,,POINT(28.8950379 41.0689027),
-karadeniz_mahallesi_t4_a,Karadeniz Mahallesi,T4,#E4002B,,POINT(28.8831312 41.0749506),
-karadeniz_mahallesi_t4_b,Karadeniz Mahallesi,T4,#E4002B,,POINT(28.8817481 41.0754807),
-rami_t4_a,Rami,T4,#E4002B,,POINT(28.9159468 41.046003),
-rami_t4_b,Rami,T4,#E4002B,,POINT(28.9152293 41.0470799),
-taşköprü_t4_a,Taşköprü,T4,#E4002B,,POINT(28.8882911 41.0722177),
-taşköprü_t4_b,Taşköprü,T4,#E4002B,,POINT(28.8871713 41.0729584),
-topçular_t4_a,Topçular,T4,#E4002B,,POINT(28.9201803 41.0411559),
-topçular_t4_b,Topçular,T4,#E4002B,,POINT(28.9190201 41.0419984),
-uluyol___bereç_t4_a,Uluyol - Bereç,T4,#E4002B,,POINT(28.9105256 41.0535171),
-uluyol___bereç_t4_b,Uluyol - Bereç,T4,#E4002B,,POINT(28.9100076 41.0546385),
+ali_fuat_başgil_t4_a,Ali Fuat Başgil,T4,#FF6B35,,POINT(28.8961452 41.0680856),
+ali_fuat_başgil_t4_b,Ali Fuat Başgil,T4,#FF6B35,,POINT(28.8950379 41.0689027),
+karadeniz_mahallesi_t4_a,Karadeniz Mahallesi,T4,#FF6B35,,POINT(28.8831312 41.0749506),
+karadeniz_mahallesi_t4_b,Karadeniz Mahallesi,T4,#FF6B35,,POINT(28.8817481 41.0754807),
+rami_t4_a,Rami,T4,#FF6B35,,POINT(28.9159468 41.046003),
+rami_t4_b,Rami,T4,#FF6B35,,POINT(28.9152293 41.0470799),
+taşköprü_t4_a,Taşköprü,T4,#FF6B35,,POINT(28.8882911 41.0722177),
+taşköprü_t4_b,Taşköprü,T4,#FF6B35,,POINT(28.8871713 41.0729584),
+topçular_t4_a,Topçular,T4,#FF6B35,,POINT(28.9201803 41.0411559),
+topçular_t4_b,Topçular,T4,#FF6B35,,POINT(28.9190201 41.0419984),
+uluyol___bereç_t4_a,Uluyol - Bereç,T4,#FF6B35,,POINT(28.9105256 41.0535171),
+uluyol___bereç_t4_b,Uluyol - Bereç,T4,#FF6B35,,POINT(28.9100076 41.0546385),
