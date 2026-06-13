@@ -365,17 +365,17 @@ tasoluk_M11_1,Taşoluk,M11,#2C3E50,1,POINT(28.7163608 41.2058124),
 tasoluk_M11_2,Taşoluk,M11,#2C3E50,2,POINT(28.7160628 41.2074814),
 universite___hasdal_M11_1,Üniversite - Hasdal,M11,#2C3E50,1,POINT(28.947188 41.1208272),
 universite__hasdal_M11_2,Üniversite- Hasdal,M11,#2C3E50,2,POINT(28.9469979 41.1217405),
-ataköy_b1_1,Ataköy,B1,#1E3A5F,1,POINT(28.8562447 40.9804594),
-bostanci_B1_x,Bostancı,B1,#1E3A5F,,POINT(29.0956204 40.9534098),Bostancı Sahil (İskele)
-bostanci_B1_x_1,Bostancı,B1,#1E3A5F,,POINT(29.0958466 40.9537942),Üst Bostancı
-bostanci_B1_x_2,Bostancı,B1,#1E3A5F,,POINT(29.0940139 40.9543943),Minibüs Yolu
-yenikapi_B1_x,Yenikapı,B1,#1E3A5F,,POINT(28.9505564 41.0050945),Namık Kemal Caddesi
-yenikapi_B1_x_1,Yenikapı,B1,#1E3A5F,,POINT(28.9524314 41.0055059),Aksaray
-uskudar_B1_Hakimiyet-i Milliye,Üsküdar,B1,#1E3A5F,Hakimiyet-i Milliye,POINT(29.0150486 41.0255416),Hakimiyet-i Milliye
-uskudar_B1_Harem Çıkışı,Üsküdar,B1,#1E3A5F,Harem Çıkışı,POINT(29.0129252 41.0257067),Harem Çıkışı
-uskudar_B1_Vapur İskelesi,Üsküdar,B1,#1E3A5F,Vapur İskelesi,POINT(29.0147969 41.0263342),
-uskudar_B1_Üsküdar Meydan,Üsküdar,B1,#1E3A5F,Üsküdar Meydan,POINT(29.0136629 41.0258084),
-uskudar_B1_Üsküdar Meydan Çıkışı,Üsküdar,B1,#1E3A5F,Üsküdar Meydan Çıkışı,POINT(29.0134996 41.0257827),Üsküdar Meydan Çıkışı
+ataköy_b1_1,Ataköy,B1,#66656A,1,POINT(28.8562447 40.9804594),
+bostanci_B1_x,Bostancı,B1,#66656A,,POINT(29.0956204 40.9534098),Bostancı Sahil (İskele)
+bostanci_B1_x_1,Bostancı,B1,#66656A,,POINT(29.0958466 40.9537942),Üst Bostancı
+bostanci_B1_x_2,Bostancı,B1,#66656A,,POINT(29.0940139 40.9543943),Minibüs Yolu
+yenikapi_B1_x,Yenikapı,B1,#66656A,,POINT(28.9505564 41.0050945),Namık Kemal Caddesi
+yenikapi_B1_x_1,Yenikapı,B1,#66656A,,POINT(28.9524314 41.0055059),Aksaray
+uskudar_B1_Hakimiyet-i Milliye,Üsküdar,B1,#66656A,Hakimiyet-i Milliye,POINT(29.0150486 41.0255416),Hakimiyet-i Milliye
+uskudar_B1_Harem Çıkışı,Üsküdar,B1,#66656A,Harem Çıkışı,POINT(29.0129252 41.0257067),Harem Çıkışı
+uskudar_B1_Vapur İskelesi,Üsküdar,B1,#66656A,Vapur İskelesi,POINT(29.0147969 41.0263342),
+uskudar_B1_Üsküdar Meydan,Üsküdar,B1,#66656A,Üsküdar Meydan,POINT(29.0136629 41.0258084),
+uskudar_B1_Üsküdar Meydan Çıkışı,Üsküdar,B1,#66656A,Üsküdar Meydan Çıkışı,POINT(29.0134996 41.0257827),Üsküdar Meydan Çıkışı
 ali_fuat_başgil_t4_a,Ali Fuat Başgil,T4,#E4002B,,POINT(28.8961452 41.0680856),
 ali_fuat_başgil_t4_b,Ali Fuat Başgil,T4,#E4002B,,POINT(28.8950379 41.0689027),
 karadeniz_mahallesi_t4_a,Karadeniz Mahallesi,T4,#E4002B,,POINT(28.8831312 41.0749506),
