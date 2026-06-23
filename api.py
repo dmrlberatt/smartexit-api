@@ -5,7 +5,6 @@ from geo_hesaplama import en_iyi_cikislari_bul, istasyon_duraklarini_getir, tum_
 from rota_motoru import yurume_rotasi_cek
 import uvicorn
 from yerler_api import router as yerler_router
-app.include_router(yerler_router)
 
 app = FastAPI(
     title="SmartExit API - Premium Sürüm",
@@ -20,7 +19,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.include_router(yerler_router)
 @app.get("/api/v1/istasyonlar")
 async def istasyonlari_listele():
     """Flutter açılışta veya kullanıcı yazarken yerel durakları (renkleriyle) dönen sıfır maliyetli link"""
