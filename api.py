@@ -4,6 +4,8 @@ import requests
 from geo_hesaplama import en_iyi_cikislari_bul, istasyon_duraklarini_getir, tum_cikis_koordinatlarini_getir
 from rota_motoru import yurume_rotasi_cek
 import uvicorn
+from yerler_api import router as yerler_router
+app.include_router(yerler_router)
 
 app = FastAPI(
     title="SmartExit API - Premium Sürüm",
