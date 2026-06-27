@@ -157,8 +157,16 @@ def maps_link_coz(link: str):
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(args=['--no-sandbox'])
-            page = browser.new_page()
-            page.goto(link, wait_until='networkidle', timeout=10000)
+            context = browser.new_context()
+            context.add_cookies([{
+                'name': 'SOCS',
+                'value': 'CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpXzIwMjMwODI5LjA3X3AwGgJlbiBiCgJlbg',
+                'domain': '.google.com',
+                'path': '/'
+            }])
+            page = context.new_page()
+            page.goto(link, wait_until='domcontentloaded', timeout=15000)
+            page.wait_for_timeout(5000)
             final_url = page.url
             browser.close()
 
@@ -169,6 +177,8 @@ def maps_link_coz(link: str):
             if 35 < lat < 43 and 25 < lon < 45:
                 return {"durum": "basarili", "enlem": lat, "boylam": lon}
 
-        return {"durum": "bulunamadi"}
+        return {"durum": "bulunamadi", "url": final_url}
+    except Exception as e:
+        return {"durum": "hata", "mesaj": str(e)}
     except Exception as e:
         return {"durum": "hata", "mesaj": str(e)}
