@@ -9,6 +9,9 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 import sqlite3
 import os
+import requests as req
+import re
+
 
 router = APIRouter()
 DB_PATH = os.path.join(os.path.dirname(__file__), "smartexit.db")
@@ -147,3 +150,28 @@ def populer_yerler():
         return [dict(r) for r in sonuclar]
     finally:
         conn.close()
+
+@router.get("/api/v1/maps-link-coz")
+def maps_link_coz(link: str):
+    try:
+        response = req.get(
+            link,
+            headers={'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15'},
+            allow_redirects=True,
+            timeout=8
+        )
+        final_url = response.url
+
+        # @lat,lon formatı
+        match = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', final_url)
+        if match:
+            return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+
+        # ?q=lat,lon formatı
+        match = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', final_url)
+        if match:
+            return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+
+        return {"durum": "bulunamadi"}
+    except Exception as e:
+        return {"durum": "hata", "mesaj": str(e)}
