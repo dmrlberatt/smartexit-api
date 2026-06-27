@@ -4,13 +4,15 @@ api.py'ye şunu ekle:
     from yerler_api import router as yerler_router
     app.include_router(yerler_router)
 """
-from urllib.parse import urlparse, parse_qs
+from playwright.sync_api import sync_playwright
 from fastapi import APIRouter
 from pydantic import BaseModel
 import sqlite3
 import os
 import requests as req
 import re
+
+
 
 router = APIRouter()
 DB_PATH = os.path.join(os.path.dirname(__file__), "smartexit.db")
@@ -153,41 +155,20 @@ def populer_yerler():
 @router.get("/api/v1/maps-link-coz")
 def maps_link_coz(link: str):
     try:
-        # 1. Adım: Sadece HEAD isteği atarak yönlendirmeleri al (Daha az RAM harcar)
-        # Bazen full GET isteği gereksiz yük bindirir.
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-        
-        # Linki olduğu gibi regex ile kontrol et (Bazı linkler yönlendirme gerektirmez)
-        # Önce linkin kendisini tara
-        def extract_coords(url_string):
-            # Format: @41.0082,28.9784
-            match1 = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', url_string)
-            if match1: return match1.groups()
-            
-            # Format: !3d41.0082!4d28.9784 (Google Share linkleri)
-            match2 = re.search(r'!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)', url_string)
-            if match2: return match2.groups()
-            
-            # Format: q=41.008,28.978
-            match3 = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', url_string)
-            if match3: return match3.groups()
-            
-            return None
+        with sync_playwright() as p:
+            browser = p.chromium.launch(args=['--no-sandbox'])
+            page = browser.new_page()
+            page.goto(link, wait_until='networkidle', timeout=10000)
+            final_url = page.url
+            browser.close()
 
-        # Linki doğrudan tara
-        coords = extract_coords(link)
-        if coords:
-            return {"durum": "basarili", "enlem": float(coords[0]), "boylam": float(coords[1])}
+        match = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', final_url)
+        if match:
+            lat = float(match.group(1))
+            lon = float(match.group(2))
+            if 35 < lat < 43 and 25 < lon < 45:
+                return {"durum": "basarili", "enlem": lat, "boylam": lon}
 
-        # 2. Adım: Eğer linkte yoksa, yönlendirme sonrası URL'yi al
-        response = req.head(link, headers=headers, allow_redirects=True, timeout=10)
-        final_url = response.url
-        
-        coords = extract_coords(final_url)
-        if coords:
-            return {"durum": "basarili", "enlem": float(coords[0]), "boylam": float(coords[1])}
-
-        return {"durum": "bulunamadi", "url": final_url}
-
+        return {"durum": "bulunamadi"}
     except Exception as e:
         return {"durum": "hata", "mesaj": str(e)}
