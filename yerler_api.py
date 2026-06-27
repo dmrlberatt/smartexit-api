@@ -154,24 +154,37 @@ def populer_yerler():
 @router.get("/api/v1/maps-link-coz")
 def maps_link_coz(link: str):
     try:
-        response = req.get(
-            link,
-            headers={'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15'},
-            allow_redirects=True,
-            timeout=8
-        )
-        final_url = response.url
+        # Google'ı tarayıcı olarak kandırmak için daha güncel bir User-Agent
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
+        
+        session = req.Session()
+        response = session.get(link, headers=headers, allow_redirects=True, timeout=10)
+        
+        # Yönlendirme zincirindeki tüm adresleri topla
+        # Bazen koordinatlar final URL'de değil, ara yönlendirme URL'lerinde olur
+        urls_to_check = [str(r.url) for r in response.history] + [response.url]
+        
+        # Tüm URL'leri sırayla tara
+        for url in urls_to_check:
+            # 1. @lat,lon formatı (En yaygın)
+            match = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', url)
+            if match:
+                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
 
-        # @lat,lon formatı
-        match = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', final_url)
-        if match:
-            return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
-
-        # ?q=lat,lon formatı
-        match = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', final_url)
-        if match:
-            return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+            # 2. ?q=lat,lon formatı
+            match = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', url)
+            if match:
+                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+            
+            # 3. /place/ adresinden sonraki koordinat yapısı veya alternatifler için
+            # Bazen Google, koordinatları "data=" parametresi içinde de saklar
+            match = re.search(r'!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)', url)
+            if match:
+                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
 
         return {"durum": "bulunamadi"}
+        
     except Exception as e:
         return {"durum": "hata", "mesaj": str(e)}
