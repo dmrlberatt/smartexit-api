@@ -4,14 +4,13 @@ api.py'ye şunu ekle:
     from yerler_api import router as yerler_router
     app.include_router(yerler_router)
 """
-
+from urllib.parse import urlparse, parse_qs
 from fastapi import APIRouter
 from pydantic import BaseModel
 import sqlite3
 import os
 import requests as req
 import re
-
 
 router = APIRouter()
 DB_PATH = os.path.join(os.path.dirname(__file__), "smartexit.db")
@@ -154,37 +153,41 @@ def populer_yerler():
 @router.get("/api/v1/maps-link-coz")
 def maps_link_coz(link: str):
     try:
-        # Google'ı tarayıcı olarak kandırmak için daha güncel bir User-Agent
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        }
+        # 1. Adım: Sadece HEAD isteği atarak yönlendirmeleri al (Daha az RAM harcar)
+        # Bazen full GET isteği gereksiz yük bindirir.
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
         
-        session = req.Session()
-        response = session.get(link, headers=headers, allow_redirects=True, timeout=10)
-        
-        # Yönlendirme zincirindeki tüm adresleri topla
-        # Bazen koordinatlar final URL'de değil, ara yönlendirme URL'lerinde olur
-        urls_to_check = [str(r.url) for r in response.history] + [response.url]
-        
-        # Tüm URL'leri sırayla tara
-        for url in urls_to_check:
-            # 1. @lat,lon formatı (En yaygın)
-            match = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', url)
-            if match:
-                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
-
-            # 2. ?q=lat,lon formatı
-            match = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', url)
-            if match:
-                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+        # Linki olduğu gibi regex ile kontrol et (Bazı linkler yönlendirme gerektirmez)
+        # Önce linkin kendisini tara
+        def extract_coords(url_string):
+            # Format: @41.0082,28.9784
+            match1 = re.search(r'@(-?\d+\.?\d*),(-?\d+\.?\d*)', url_string)
+            if match1: return match1.groups()
             
-            # 3. /place/ adresinden sonraki koordinat yapısı veya alternatifler için
-            # Bazen Google, koordinatları "data=" parametresi içinde de saklar
-            match = re.search(r'!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)', url)
-            if match:
-                return {"durum": "basarili", "enlem": float(match.group(1)), "boylam": float(match.group(2))}
+            # Format: !3d41.0082!4d28.9784 (Google Share linkleri)
+            match2 = re.search(r'!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)', url_string)
+            if match2: return match2.groups()
+            
+            # Format: q=41.008,28.978
+            match3 = re.search(r'[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)', url_string)
+            if match3: return match3.groups()
+            
+            return None
 
-        return {"durum": "bulunamadi"}
+        # Linki doğrudan tara
+        coords = extract_coords(link)
+        if coords:
+            return {"durum": "basarili", "enlem": float(coords[0]), "boylam": float(coords[1])}
+
+        # 2. Adım: Eğer linkte yoksa, yönlendirme sonrası URL'yi al
+        response = req.head(link, headers=headers, allow_redirects=True, timeout=10)
+        final_url = response.url
         
+        coords = extract_coords(final_url)
+        if coords:
+            return {"durum": "basarili", "enlem": float(coords[0]), "boylam": float(coords[1])}
+
+        return {"durum": "bulunamadi", "url": final_url}
+
     except Exception as e:
         return {"durum": "hata", "mesaj": str(e)}
