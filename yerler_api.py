@@ -166,7 +166,7 @@ def maps_link_coz(link: str):
             }])
             page = context.new_page()
             page.goto(link, wait_until='domcontentloaded', timeout=15000)
-            page.wait_for_timeout(5000)
+            page.wait_for_timeout(3000)
             final_url = page.url
             browser.close()
 
